@@ -1,4 +1,4 @@
-function doFirst(){
+function init(){
 	timer = document.getElementById("timer");
 	pause_button = document.getElementById("pause_button");
 	console.log("awd");
@@ -7,7 +7,6 @@ function doFirst(){
 	timerid = 0;
 	isRunning = false;
 
-	//.........Alarm Audio element.........//
 	alarm = new Audio('alarm.mp3');
 	alarm.volume = 0.05;
 }
@@ -24,7 +23,6 @@ function long_break(){
 	stop_timer();
 	start_timer(10,0);
 }
-//updates the timer
 function update_timer(){
 	seconds--;
 	if(seconds== -1 & minutes == 0){
