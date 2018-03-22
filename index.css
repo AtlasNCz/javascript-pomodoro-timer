@@ -1,0 +1,22 @@
+*{
+	text-align: center;
+	maegin:;
+}
+h1{
+	font-size: 70pt;
+	font-family: tahoma;
+	margin:0 auto;
+	margin-top: 300px;
+}
+button{
+	margin-bottom:.15em;
+	padding:.5em;
+	font-family: calibri;
+	font-size: 20pt;
+	border:none;
+	background-color: #999;
+	color:white;
+}
+#pauseButton{
+	background-color: green;
+}
