@@ -1,84 +1,78 @@
 function doFirst(){
-	clock = document.getElementById("clock");
-	pauseButton = document.getElementById("pauseButton");
-	
-	//..........variables......//
+	timer = document.getElementById("timer");
+	pause_button = document.getElementById("pause_button");
+	console.log("awd");
 	seconds = 0;
 	minutes = 25;
 	timerid = 0;
 	isRunning = false;
 
 	//.........Alarm Audio element.........//
-	audio = new Audio('alarm.mp3');
-	audio.volume = 0.05;
+	alarm = new Audio('alarm.mp3');
+	alarm.volume = 0.05;
 }
 
-///////   buttons functions    ////////
-function startTimer(time){
-	stopWatch();
-	startWatch(time,0);
+function pomodoro(){
+	stop_timer();
+	start_timer(25,0);
 }
-function pomodoroStart(){
-	stopWatch();
-	startWatch(25,0);
+function short_break(){
+	stop_timer();
+	start_timer(5,0);
 }
-function shortBreakStart(){
-	stopWatch();
-	startWatch(5,0);
+function long_break(){
+	stop_timer();
+	start_timer(10,0);
 }
-function longBreakStart(){
-	stopWatch();
-	startWatch(10,0);
-}
-//......timer update function.......//
-function timerRun(){
+//updates the timer
+function update_timer(){
 	seconds--;
-	if(seconds=== -1 & minutes === 0){
+	if(seconds== -1 & minutes == 0){
 		buzz();
 		seconds = 0;
-		stopWatch();
-	}else if(seconds === -1 & minutes > 0){
+		stop_timer();
+	}else if(seconds == -1 & minutes > 0){
 		seconds = 59;
 		minutes--;
 	}
-	updateClock(minutes,seconds);
+	update_view(minutes,seconds);
 }
-function stopWatch(){
-	if(isRunning===true){
-		clearInterval(timerId);
-		pauseButton.innerHTML = "Start";
-	}
-}
-// makes noise
+// set off the alarm sound
 function buzz(){
-	audio.play();
+	alarm.play();
 }
-//Button Start and pause
-function startPause(){
+// resume/pause the timer 
+function resume_pause(){
 	if(isRunning===false){
-		startWatch(minutes,seconds)
+		start_timer(minutes,seconds)
 		isRunning=true;
 	}else{
-		stopWatch();
-		pauseButton.style.background="green";
-		audio.pause();
+		stop_timer();
+		pause_button.style.background="green";
+		alarm.pause();
 		isRunning=false;
 	}
 }
-function startWatch(m,s){
-	pauseButton.style.background="red";
-	pauseButton.innerHTML = "Pause";
-	audio.pause();
-	updateClock(m,s);
+function start_timer(m,s){
+	pause_button.style.background="red";
+	pause_button.innerHTML = "Pause";
+	alarm.pause();
+	update_view(m,s);
 	minutes = m;
 	seconds = s;
 	isRunning = true;
-	timerId =setInterval(timerRun, 1000);
+	timerId =setInterval(update_timer, 1000);
 }
-function updateClock(m,s){
+function stop_timer(){
+	if(isRunning===true){
+		clearInterval(timerId);
+		pause_button.innerHTML = "Start";
+	}
+}
+function update_view(m,s){
 	min = "00"+ m;
 	sec = "00"+ s; 
 	min = min.slice(-2);
 	sec = sec.slice(-2);
-	clock.innerHTML = min+":"+sec;
+	timer.innerHTML = min+":"+sec;
 }
